@@ -1,0 +1,29 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: install cross-compiling deps
+      run: |
+        sudo apt-get -y update
+        sudo apt-get install -y mingw-w64
+        mkdir -p ~/.cargo
+        wget "https://gist.githubusercontent.com/duckfromdiscord/d759952442a5550e546e7f6c45161729/raw/7e41b0173cde79caf016204e19a9e9a4c6f48fc6/config" -O ~/.cargo/config
+    - name: Setup toolchain
+      uses: dtolnay/rust-toolchain@master
+      with:
+          toolchain: nightly
+          targets: i686-pc-windows-gnu
+          components: rust-src
+    - name: Build for Windows
+      run: cargo build --release --target i686-pc-windows-gnu

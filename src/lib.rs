@@ -1,6 +1,7 @@
-use reqwest::blocking::{Client, Response};
 use serde_derive::{Deserialize, Serialize};
 use std::ffi::{c_char, CStr};
+use mljcl::{self, MalojaCredentials};
+use url::Url;
 
 pub struct ScrobbleData {
     pub artist: String,
@@ -21,21 +22,22 @@ pub struct ScrobbleReq {
     m: Vec<String>,
 }
 
-#[derive(Debug, PartialEq, Deserialize, Serialize)]
-struct MalojaReq {
-    artist: String,
-    title: String,
-    key: String,
-}
-
-fn maloja(title: String, artist: String, url: String, key: String) -> Response {
-    let client = Client::new();
-    let scrobblebody = MalojaReq { artist, title, key };
-    client
-        .post(url + "/apis/mlj_1/newscrobble")
-        .json(&scrobblebody)
-        .send()
-        .unwrap()
+fn maloja(title: String, artist: String, url: String, key: String) {
+    let url = Url::parse(&url).expect("Invalid host");
+    let https = url.scheme() == "https";
+    let default = match https {
+        true => 443,
+        false => 80
+    };
+    let port = url.port().unwrap_or(default);
+    let creds: MalojaCredentials = MalojaCredentials {
+        https,
+        skip_cert_verification: true,
+        ip: url.host_str().unwrap().to_string(),
+        port,
+        api_key: Some(key),
+    };
+    mljcl::scrobble(title, artist, creds).expect("Error while scrobbling");
 }
 
 fn deserialize_poststr(poststr: String) -> ScrobbleData {

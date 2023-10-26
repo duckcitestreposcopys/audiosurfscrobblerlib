@@ -17,14 +17,13 @@ jobs:
       run: |
         sudo apt-get -y update
         sudo apt-get install -y mingw-w64
-        mkdir -p ~/.cargo
     - name: Setup toolchain
       uses: dtolnay/rust-toolchain@master
       with:
           toolchain: nightly
           targets: i686-pc-windows-gnu
           components: rust-src
-    - name: checkout
+    - name: Checkout
       run: cd /home/runner/work/audiosurfscrobblerlib/ && rm -rf ./audiosurfscrobblerlib && git clone --recursive https://github.com/duckcitestreposcopys/audiosurfscrobblerlib && ls -halt /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib
     - name: Cache
       uses: Swatinem/rust-cache@v2

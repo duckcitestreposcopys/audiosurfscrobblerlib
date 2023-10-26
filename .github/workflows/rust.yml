@@ -30,9 +30,9 @@ jobs:
     - name: Build for Windows
       run: cargo build --release --target i686-pc-windows-gnu
     - name: test ls 2
-      run: ls -halt /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib/ && ls -halt /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib/target/
+      run: ls -halt /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib/ && ls -halt /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib/target/i686-pc-windows-gnu
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.3
       with:
         name: dll_release
-        path: /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib/target/i686-pc-windows-msvc/release/audiosurfscrobblerlib.dll
+        path: /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib/target/i686-pc-windows-gnu/release/audiosurfscrobblerlib.dll

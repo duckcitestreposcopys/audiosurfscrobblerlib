@@ -26,6 +26,6 @@ jobs:
     #      targets: i686-pc-windows-gnu
     #      components: rust-src
     - name: test ls
-      run: ls /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib
+      run: ls -halt /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib
     - name: Build for Windows
       run: cargo build --release --target i686-pc-windows-gnu

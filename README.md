@@ -4,4 +4,4 @@ An extension for preloadenabler that provides the logic needed to submit a scrob
 
 Support for other scrobble servers may be added soon.
 
-Absolutely **required** to be built for 32-bit Windows: `cargo build --target=i686-pc-windows-msvc`
+Absolutely **required** to be built for 32-bit Windows: `cargo build --target=i686-pc-windows-msvc`.

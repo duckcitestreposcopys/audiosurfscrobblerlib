@@ -2,7 +2,7 @@ name: Rust
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "lto-test", "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -24,7 +24,9 @@ jobs:
           targets: i686-pc-windows-gnu
           components: rust-src
     - name: Checkout
-      run: cd /home/runner/work/audiosurfscrobblerlib/ && rm -rf ./audiosurfscrobblerlib && git clone --recursive https://github.com/duckcitestreposcopys/audiosurfscrobblerlib && ls -halt /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib
+      uses: actions/checkout@v4
+    - name: debug
+      run: pwd && ls -halt
     - name: Cache
       uses: Swatinem/rust-cache@v2
     - name: Build for Windows

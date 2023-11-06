@@ -2,7 +2,7 @@ name: Rust
 
 on:
   push:
-    branches: [ "lto-test", "main" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -29,7 +29,6 @@ jobs:
       uses: Swatinem/rust-cache@v2
     - name: Build for Windows
       run: cargo build --release --target i686-pc-windows-gnu
-    - name 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.3
       with:

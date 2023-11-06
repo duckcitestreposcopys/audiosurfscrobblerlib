@@ -29,8 +29,13 @@ jobs:
       uses: Swatinem/rust-cache@v2
     - name: Build for Windows
       run: cargo build --release --target i686-pc-windows-gnu
-    - name: Upload a Build Artifact
+    - name: Upload cdylib
       uses: actions/upload-artifact@v3.1.3
       with:
         name: dll_release
         path: /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib/target/i686-pc-windows-gnu/release/audiosurfscrobblerlib.dll
+    - name: Upload staticlib
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        name: lib_release
+        path: /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib/target/i686-pc-windows-gnu/release/audiosurfscrobblerlib.lib

@@ -34,6 +34,8 @@ jobs:
       with:
         name: dll_release
         path: /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib/target/i686-pc-windows-gnu/release/audiosurfscrobblerlib.dll
+    - name: debug
+      run:  ls -halt /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib/target/ && ls -halt /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib/target/i686-pc-windows-gnu/ && ls -r /home/runner/work/audiosurfscrobblerlib/audiosurfscrobblerlib/target/i686-pc-windows-gnu/release
     - name: Upload staticlib
       uses: actions/upload-artifact@v3.1.3
       with:

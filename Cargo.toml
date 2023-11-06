@@ -15,7 +15,7 @@ msgbox = "0.7.0"
 
 [lib]
 name = "audiosurfscrobblerlib"
-crate-type = ["cdylib"]
+crate-type = ["cdylib", "staticlib"]
 
 [profile.release]
 lto = "thin"

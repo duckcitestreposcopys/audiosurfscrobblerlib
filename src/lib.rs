@@ -36,6 +36,7 @@ fn maloja(title: String, artist: String, url: String, key: String) {
         ip: url.host_str().unwrap().to_string(),
         port,
         path: None,
+        headers: None,
         api_key: Some(key),
     };
     mljcl::scrobble(title, artist, creds).expect("Error while scrobbling");

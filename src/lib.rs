@@ -1,6 +1,6 @@
 use serde_derive::{Deserialize, Serialize};
 use std::ffi::{c_char, CStr};
-use mljcl::{self, MalojaCredentials};
+use mljcl::{self, credentials::{MalojaCredentialsBuilder, MalojaCredentials}};
 use url::Url;
 
 pub struct ScrobbleData {
@@ -30,15 +30,14 @@ fn maloja(title: String, artist: String, url: String, key: String) {
         false => 80
     };
     let port = url.port().unwrap_or(default);
-    let creds: MalojaCredentials = MalojaCredentials {
-        https,
-        skip_cert_verification: true,
-        ip: url.host_str().unwrap().to_string(),
-        port,
-        path: None,
-        headers: None,
-        api_key: Some(key),
-    };
+    let creds: MalojaCredentials = MalojaCredentialsBuilder::new()
+        .https(https)
+        .skip_cert_verification(true)
+        .ip(url.host_str().unwrap().to_string())
+        .port(port)
+        .api_key(key)
+        .build()
+        .unwrap();
     mljcl::scrobble(title, artist, creds).expect("Error while scrobbling");
 }
 
